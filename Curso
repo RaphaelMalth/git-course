@@ -1,0 +1,171 @@
+$ git config user.name  // Mostra o nome de usuario.
+$ git config user.email  //Mostra o email do usuario.
+$ git config --list  // mostra todas as configurações.
+
+$ mkdir git-course   //Cria um diretorio novo.
+
+$ cd git-course/   //Acessa o diretorio recem criado.
+
+$ git init //Inicializa um repositorio para o git, fica enxergando todas as mudanças feita nesse projeto.
+
+$ ls -la //verifica os diretorios criados
+
+$ cd .git/  //abrindo o diretorio .git
+
+$ ls //verifica o conteudo do diretorio.
+
+$ cd .. //retorna 1 diretorio.
+
+$ vi Readme.md // usa o Vim para acessar o arquivo Readme.md
+   >>>>>  Apertar a tecla "i" entra no modo inserção e torno possivel editar o arquivo.
+     >>>> Apertar a tecla ESC, depois ":" para entrar linha de comando, "w" para salvar           e "q" para sair, ficando então o comando, ESC > :wq > ENTER
+
+=================================================================================
+CICLO DE VIDA DO STATUS DOS ARQUIVOS
+
+
+UNTRACKED - acabou de ser criado no diretorio e ainda não foi visto pelo Git.
+
+UNMODIFIED - o arquivo foi visto(existe) pelo git e ainda não foi modificado
+
+MODIFIED - Caso você edite/altere o arquivo ele fica como modified.
+
+STAGED - Você pode jogar o arquivo modificado para uma area que será criada uma versão, é chamada de STAGED. "O momento que a versão for criada, leve esse arquivo"
+    >>> depois que é feito o commit, todos os arquivos se tornam UNMODIFIED, ou seja         nada foi modificado desde a ultima versão criada.
+===================================================================================
+$ vim Readme.md  // cria um novo arquivo chamado Readme.md no repositorio. Ele fica                     como UNTRACKED, já que acabou de ser criado e o git ainda não                     reconhece ele.
+
+$ git status     // serve para reportar como esta o repositorio no momento.
+
+$ add Readme.md  //Adiciona esse arquivo/pode ser comitado, ele passa a ser visto                          pelo Git, momento do STAGED. Caso o arquivo seja editado, o                             arquivo passa a ser MODIFIED.
+
+$ git commit -m "Add Readme.md"   // -m serve para passar uma mensagem/comentario                                            entre " "(é uma boa pratica colocar na mensagem                                         as alterações que você fez)
+                                  // COMMIT é o momento que você diz para o Git                                              pegar todos os arquivos do repositorio e criar                                          um snapshot, crie uma imagem, crie uma nova                                             versão.
+
+$ git log //mostra uma serie de informações sobre os commits, autores e etc.
+
+$ git log --decorate  // De qual branch pra qual branch, se houve alguma MERGE, mais                             informações importante.
+
+$ git log --author="Raphael"  //Lista todos os commits pelo nome do author.
+
+$ git shotlog // Mostra em ordem alfabedica os autores, quantos commits fizeram e quais                  foram. (Mensurar a parte de contribuintes)
+
+$ git shotlog -sn // Mostra apenas a quantidade de commits por autor.
+
+$ git log --graph  // Mostra em forma grafica o que está acontecendo com o branchs e as                       versões.
+
+$ git show c84614aac2bbfce15cf0b8ec64bf14decbf3b560   // HASH = código alfa numérico de                                                           um determinado commits
+
+$ git diff // Serve para visualizarmos as alterações que fizemos, antes de commitar. É 	      muito importante para dar um revisada antes de realizar o commit.
+
+$ git diff --name-only // No caso de muitos arquivos, serve para mostrar apenas o nome                          dos arquivos alterados.
+
+$ git commit -am "Edit Readme"  // Commita direto sem precisar dar STAGED devido ao -a                                     o -m coloca uma mensagem.
+
+=======================================================================================
+$ git checkout Readme.md // checkout + nome do arquivo, para resetar alterações feitas                              em um arquivo MODIFIED antes do STAGED.
+$ git reset HEAD Readme.md // Volta para a origem do ponto de onde já se encontra,                               antes do STAGED do arquivo, para poder dar um checkout                               caso seja necessario.
+
+$ git reset --soft --mixed --hard (PEGAR A HASH DO COMMIT ANTERIOR)
+// --soft = pega as modificações e vai matar esse commit, mas ele já vai estar no staged prontinho para dar o commit novamente.
+// --mixed = ele vai matar o commit e vai voltar os arquivos para antes do STAGED, ou seja para o MODIFIED.
+// --hard = Ele vai simplesmente ignorar a existencia desse commit DELETANDO ele da historia. srsrs
+=======================================================================================
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+$ cd ~/.ssh/  //pasta onde ficar as chaves SSH para conectividade com o github
+
+$ ls // para olhar as pastas
+
+id_rsa.pub // é a chave utilizada para colocar no github!
+
+$ cat id_rsa.pub
+ou
+$ more id_rsa.pub
+ou
+$ vi id_rsa.pub  // Serve para pegar a chave!
+=======================================================================================
+git remote add origin https://github.com/RaphaelMalth/github-estudo.git
+// serve para push em um repositorio já existente no local.
+
+----------------------------
+PROCEDIMENTO PADRÃO
+----------------------------
+// cria uma pasta
+mkdir git-course
+ 
+// inicia o git
+git init
+ 
+// cria arquivos e salva
+ 
+// adiciona os arquivos
+git add .
+ 
+// cria um commit
+git commit -m "Add files"
+ 
+// liga o repositório local ao remoto
+git remote add origin url_do_repo
+ 
+// sobe o código para o remoto (o -u é para ligar esse branch, mas é opcional)
+git push -u origin master
+ 
+// Depois é só seguir o fluxo de criar arquivos/commits/subir para o remoto
+--------------------------------
+$ git clone SSH nomepasta // serve para clonar um repositorio do github
+=======================================================================================
+------------------
+O QUE É UM BRANCH?
+------------------
+É um ponteiro móvel que leva a um commit.
+Por que usar um Branch?
+Vantagens 
+> Poder modificar sem alterar o local principal(master)
+> Facilmente "desligável"
+> Múltiplas pessoas trabalhando
+> Evita Conflitos
+-------------------
+CRIANDO UM BRANCH
+-------------------
+$ git checkout -b nomeBranch // cria um novo Branch chamado testing
+$ git branch // mostra a lista de Branches e em qual você está no momento com um *
+$ git checkout nomeBranch // troca/navega entre os Branch
+$ git branch -D nomeBranch // Deleta um branch
+=======================================================================================
+UNINDO BRANCHES
+===============
+MERGE
+-----
+PRÓS					Contras
+> Operação não destrutiva           > Commit extra
+                                    > Histórico poluído
+------
+REBASE
+------
+PRÓS					Contras
+> Evita commits extras              > Perde ordem cronológica(pode dar conflito)
+> Histórico linear
+=======================================================================================
+$ vi .gitignore  //dentro do arquivo .gitignore adicionar tudo o que não quiser que apareça no git.
+=======================================================================================
+$ git stash //salva uma modificação "fora do projeto", não aparece no status.
+$ git stash apply  //aplica as modificações antes feitas e salvas fora do projeto.
+$ git stash list  //mostra a lista de todos os stash que estão sendo feitos
+$ git stash clear //limpa todos os stashs
+=======================================================================================
+ALIAS
+=====
+$ git config --global alias.s status //coloca um "atalho" para o comando, uma alias.
+=======================================================================================
+Versionando com TAGs
+====================
+$ git tag -a 1.0.0 -m "Mensagem"//Anotação ou dado
+$ git push origin master --tags //sobe a tag para o github e aparece nos releases.
+=======================================================================================
+GIT REVERT
+==========
+$ git revert commit //Volta o commit sem apaga-lo, para deixar o mesmo ainda em funcionamento, reverte apenas a alteração sem apagar o commit. Reverte sem apagar as coisas, dai não tem perda, para poder corrigir, trabalhar depois.
+
+
+
