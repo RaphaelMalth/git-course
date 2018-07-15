@@ -18,7 +18,8 @@ $ cd .. //retorna 1 diretorio.
 
 $ vi Readme.md // usa o Vim para acessar o arquivo Readme.md
    >>>>>  Apertar a tecla "i" entra no modo inserção e torno possivel editar o arquivo.
-     >>>> Apertar a tecla ESC, depois ":" para entrar linha de comando, "w" para salvar           e "q" para sair, ficando então o comando, ESC > :wq > ENTER
+     >>>> Apertar a tecla ESC, depois ":" para entrar linha de comando, "w" para salvar e "q" para sair, ficando então o comando, 
+          ESC > :wq > ENTER
 
 =================================================================================
 CICLO DE VIDA DO STATUS DOS ARQUIVOS
@@ -30,41 +31,61 @@ UNMODIFIED - o arquivo foi visto(existe) pelo git e ainda não foi modificado
 
 MODIFIED - Caso você edite/altere o arquivo ele fica como modified.
 
-STAGED - Você pode jogar o arquivo modificado para uma area que será criada uma versão, é chamada de STAGED. "O momento que a versão for criada, leve esse arquivo"
-    >>> depois que é feito o commit, todos os arquivos se tornam UNMODIFIED, ou seja         nada foi modificado desde a ultima versão criada.
+STAGED - Você pode jogar o arquivo modificado para uma area que será criada uma versão, é chamada de STAGED. 
+         "O momento que a versão for criada, leve esse arquivo"
+          >>> depois que é feito o commit, todos os arquivos se tornam UNMODIFIED, ou seja         
+              nada foi modificado desde a ultima versão criada.
 ===================================================================================
-$ vim Readme.md  // cria um novo arquivo chamado Readme.md no repositorio. Ele fica                     como UNTRACKED, já que acabou de ser criado e o git ainda não                     reconhece ele.
+$ vim Readme.md  // cria um novo arquivo chamado Readme.md no repositorio. Ele fica                     
+                    como UNTRACKED, já que acabou de ser criado e o git ainda não                     
+                    reconhece ele.
 
 $ git status     // serve para reportar como esta o repositorio no momento.
 
-$ add Readme.md  //Adiciona esse arquivo/pode ser comitado, ele passa a ser visto                          pelo Git, momento do STAGED. Caso o arquivo seja editado, o                             arquivo passa a ser MODIFIED.
+$ add Readme.md  //Adiciona esse arquivo/pode ser comitado, ele passa a ser visto                           
+                   pelo Git, momento do STAGED. Caso o arquivo seja editado, o                             
+                   arquivo passa a ser MODIFIED.
 
-$ git commit -m "Add Readme.md"   // -m serve para passar uma mensagem/comentario                                            entre " "(é uma boa pratica colocar na mensagem                                         as alterações que você fez)
-                                  // COMMIT é o momento que você diz para o Git                                              pegar todos os arquivos do repositorio e criar                                          um snapshot, crie uma imagem, crie uma nova                                             versão.
+$ git commit -m "Add Readme.md"   // -m serve para passar uma mensagem/comentario                                            
+                                     entre " "(é uma boa pratica colocar na mensagem                                         
+                                     as alterações que você fez)
+                                  // COMMIT é o momento que você diz para o Git                                              
+                                     pegar todos os arquivos do repositorio e criar                                          
+                                     um snapshot, crie uma imagem, crie uma nova                                             
+                                     versão.
 
 $ git log //mostra uma serie de informações sobre os commits, autores e etc.
 
-$ git log --decorate  // De qual branch pra qual branch, se houve alguma MERGE, mais                             informações importante.
+$ git log --decorate  // De qual branch pra qual branch, se houve alguma MERGE, mais                             
+                         informações importante.
 
 $ git log --author="Raphael"  //Lista todos os commits pelo nome do author.
 
-$ git shotlog // Mostra em ordem alfabedica os autores, quantos commits fizeram e quais                  foram. (Mensurar a parte de contribuintes)
+$ git shotlog // Mostra em ordem alfabedica os autores, quantos commits fizeram e quais                  
+                 foram. (Mensurar a parte de contribuintes)
 
 $ git shotlog -sn // Mostra apenas a quantidade de commits por autor.
 
-$ git log --graph  // Mostra em forma grafica o que está acontecendo com o branchs e as                       versões.
+$ git log --graph  // Mostra em forma grafica o que está acontecendo com o branchs e as                       
+                      versões.
 
 $ git show c84614aac2bbfce15cf0b8ec64bf14decbf3b560   // HASH = código alfa numérico de                                                           um determinado commits
 
-$ git diff // Serve para visualizarmos as alterações que fizemos, antes de commitar. É 	      muito importante para dar um revisada antes de realizar o commit.
+$ git diff // Serve para visualizarmos as alterações que fizemos, antes de commitar. 
+              É muito importante para dar um revisada antes de realizar o commit.
 
-$ git diff --name-only // No caso de muitos arquivos, serve para mostrar apenas o nome                          dos arquivos alterados.
+$ git diff --name-only // No caso de muitos arquivos, serve para mostrar apenas o nome                          
+                          dos arquivos alterados.
 
-$ git commit -am "Edit Readme"  // Commita direto sem precisar dar STAGED devido ao -a                                     o -m coloca uma mensagem.
+$ git commit -am "Edit Readme"  // Commita direto sem precisar dar STAGED devido ao -a                                     
+                                   o -m coloca uma mensagem.
 
 =======================================================================================
-$ git checkout Readme.md // checkout + nome do arquivo, para resetar alterações feitas                              em um arquivo MODIFIED antes do STAGED.
-$ git reset HEAD Readme.md // Volta para a origem do ponto de onde já se encontra,                               antes do STAGED do arquivo, para poder dar um checkout                               caso seja necessario.
+$ git checkout Readme.md // checkout + nome do arquivo, para resetar alterações feitas                              
+                            em um arquivo MODIFIED antes do STAGED.
+$ git reset HEAD Readme.md // Volta para a origem do ponto de onde já se encontra,                               
+                              antes do STAGED do arquivo, para poder dar um checkout                               
+                              caso seja necessario.
 
 $ git reset --soft --mixed --hard (PEGAR A HASH DO COMMIT ANTERIOR)
 // --soft = pega as modificações e vai matar esse commit, mas ele já vai estar no staged prontinho para dar o commit novamente.
@@ -165,7 +186,9 @@ $ git push origin master --tags //sobe a tag para o github e aparece nos release
 =======================================================================================
 GIT REVERT
 ==========
-$ git revert commit //Volta o commit sem apaga-lo, para deixar o mesmo ainda em funcionamento, reverte apenas a alteração sem apagar o commit. Reverte sem apagar as coisas, dai não tem perda, para poder corrigir, trabalhar depois.
+
+$ git revert commit //Volta o commit sem apaga-lo, para deixar o mesmo ainda em funcionamento, reverte apenas a alteração sem apagar 
+                      o commit. Reverte sem apagar as coisas, dai não tem perda, para poder corrigir, trabalhar depois.
 
 
 
